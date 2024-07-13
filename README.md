@@ -10,3 +10,4 @@
 - Абсолютно бесплатный SMS(Call)-Bomber для windows 10 с более чем 20-и сервисами, работает по всем операторам Украины.
 
       Підтримати автора / Support the author / Поддержать автора:
+![test](https://github.com/user-attachments/assets/3dfac76b-fd3a-470e-9018-35543c17ff67)
