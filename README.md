@@ -1,8 +1,7 @@
 💣 SMS-Bomber UA 💣
 
 - Абсолютно безкоштовний SMS(Call)-Bomber для windows 10 з більш ніж 20-ма сервісами, працює по всіх операторах України.
-
-
+  
 
 - Absolutely free SMS(Call)-Bomber for windows 10 with more than 20 services, works for all operators in Ukraine.
 
