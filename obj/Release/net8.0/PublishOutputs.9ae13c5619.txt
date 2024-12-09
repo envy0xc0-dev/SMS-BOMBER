@@ -1,0 +1,5 @@
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\publish\SMS-Bomber.exe
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\publish\SMS-Bomber.dll
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\publish\SMS-Bomber.deps.json
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\publish\SMS-Bomber.runtimeconfig.json
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\publish\SMS-Bomber.pdb

@@ -1,0 +1,14 @@
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\SMS-Bomber.exe
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\SMS-Bomber.deps.json
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\SMS-Bomber.runtimeconfig.json
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\SMS-Bomber.dll
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\SMS-Bomber.pdb
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.AssemblyInfoInputs.cache
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.AssemblyInfo.cs
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.csproj.CoreCompileInputs.cache
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.dll
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\refint\SMS-Bomber.dll
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.pdb
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\SMS-Bomber.genruntimeconfig.cache
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\obj\Release\net8.0\ref\SMS-Bomber.dll

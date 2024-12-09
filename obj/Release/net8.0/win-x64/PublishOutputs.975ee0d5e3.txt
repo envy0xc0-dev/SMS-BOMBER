@@ -1,0 +1,2 @@
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\win-x64\publish\SMS-Bomber.pdb
+C:\Users\SCAM\Downloads\SMS-Bomber-main\bomber\bin\Release\net8.0\win-x64\publish\SMS-Bomber.exe
