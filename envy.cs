@@ -158,7 +158,7 @@ internal class envy{
                 SendRequestAsync("https://auth.easypay.ua/api/check", HttpMethod.Post, $"{{\"phone\": \"{phone}\"}}", "application/json", new Dictionary<string, string>
                 {
                     { "User-Agent", GenerateUserAgent() },
-                    { "Referer", "https://auth.easypay.ua/api/check" },
+                    { "Referer", "https://auth.easypay.ua/" },
                     { "appid", "e63b0537-bf15-453f-8a02-d49f85261e61" },
                     { "pageid", "663b83ef-bfe9-47d9-809b-98784d37a12c" },
                     { "partnerkey", "easypay-v2" },
