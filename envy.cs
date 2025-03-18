@@ -33,72 +33,57 @@ internal class envy{
 
     private static List<string> proxyList = new List<string>
     {
-    "185.226.204.160:5713",
-    "103.210.206.26:8080",
-    "156.228.116.140:3128",
-    "122.52.141.182:8080",
-    "162.220.246.225:6509",
-    "72.10.160.93:12649",
-    "103.218.24.67:58080",
-    "188.253.112.218:80",
-    "156.228.115.84:3128",
-    "58.209.137.169:8089",
-    "101.47.31.33:20000",
-    "108.170.12.11:80",
-    "18.134.236.231:1080",
-    "103.163.244.106:1080",
-    "101.47.24.160:20000",
-    "103.158.162.18:8080",
-    "3.10.93.50:3128",
-    "103.158.253.162:8199",
-    "50.174.7.156:80",
-    "104.207.40.42:3128",
-    "222.67.12.40:1080",
-    "93.184.9.9:1080",
-    "165.140.185.179:39593",
-    "49.84.134.15:8089",
-    "47.238.134.126:81",
-    "130.255.160.60:11813",
-    "72.10.160.170:10603",
-    "8.130.36.245:808",
-    "91.241.21.17:9812",
-    "41.216.232.213:4153",
-    "37.26.86.206:47464",
-    "177.125.86.108:8080",
-    "101.47.23.173:20000",
-    "27.79.164.240:16000",
-    "13.37.73.214:3128",
-    "104.207.34.233:3128",
-    "181.78.6.219:8080",
-    "83.168.74.163:8080",
-    "51.158.113.139:16379",
-    "101.47.137.207:20000",
-    "45.225.120.36:40033",
-    "15.207.35.241:80",
-    "156.228.107.148:3128",
-    "5.8.240.93:4153",
-    "47.245.117.43:80",
-    "104.207.47.7:3128",
-    "162.220.246.151:6435",
-    "188.132.222.134:8080",
-    "154.38.161.76:32456",
-    "112.78.40.210:8080",
-    "190.220.1.173:35376",
-    "93.182.26.66:1080",
-    "104.207.48.122:3128",
-    "200.71.109.102:999",
-    "101.47.17.160:20000",
-    "156.228.77.163:3128",
-    "103.74.107.215:61308",
-    "59.98.4.70:8080",
-    "179.99.114.7:8080",
-    "202.79.47.194:1080",
-    "152.26.229.52:9443",
-    "104.207.41.232:3128",
-    "34.244.90.35:80",
-    "38.45.242.120:999",
-    "8.213.129.2:5000",
-    "8.221.14188:11"
+    "192.73.244.36:80",
+    "61.145.214.107:65533",
+    "103.178.194.52:8080",
+    "201.91.82.155:3128",
+    "36.136.27.2:4999",
+    "47.250.159.65:9080",
+    "27.189.132.84:8089",
+    "218.13.39.150:9091",
+    "148.72.212.125:12041",
+    "103.107.84.191:8080",
+    "38.191.209.202:999",
+    "34.87.84.105:80",
+    "49.67.128.139:1080",
+    "180.191.23.149:8082",
+    "27.189.131.14:8089",
+    "103.124.197.234:8080",
+    "141.11.103.136:8080",
+    "181.196.254.201:999",
+    "143.42.191.48:80",
+    "218.77.183.214:5224",
+    "103.242.105.111:8080",
+    "157.245.95.247:443",
+    "114.224.142.89:8089",
+    "88.99.171.90:7003",
+    "83.219.145.108:3128",
+    "192.9.188.22:8008",
+    "27.72.244.228:8080",
+    "67.213.212.54:14098",
+    "196.251.223.29:8104",
+    "5.161.103.41:88",
+    "89.46.249.253:53018",
+    "103.157.117.61:8080",
+    "49.84.175.94:8089",
+    "8.211.138.60:3389",
+    "91.241.48.225:35852",
+    "200.174.198.86:8888",
+    "103.172.249.234:3128",
+    "112.64.134.154:1443",
+    "189.61.199.170:37218",
+    "51.91.109.83:80",
+    "121.177.154.16:3033",
+    "58.243.224.244:8085",
+    "181.192.2.23:8080",
+    "218.1.197.207:2324",
+    "103.155.116.239:8080",
+    "121.224.156.178:8089",
+    "181.129.235.114:999",
+    "113.23.155.110:1231",
+    "199.229.254.129:4145",
+    "171.244.140.160:31695",
+    "106.38.26.22:2080"
     };
 
         static async Task Main(){
@@ -176,50 +161,79 @@ internal class envy{
     }
 
 
-    public static string GenerateUserAgent()
-    {
+    public static string GenerateUserAgent(){
         return userAgents[random.Next(userAgents.Count)];
     }
-
-    static async Task SendRequestAsync(string url, HttpMethod method, string data, string mediaType, Dictionary<string, string> headers)
-    {
-        var proxyAddress = proxyList[random.Next(proxyList.Count)];
+    
+    static async Task SendRequestAsync(string url, HttpMethod method, string data, string mediaType, Dictionary<string, string> headers){
+        int requestCount = proxyList.Count;
+        Console.WriteLine("Отправка запросов без прокси...");
+        await SendRequestWithoutProxy(url, method, data, mediaType, headers);
+        Console.WriteLine("Отправка запросов через прокси...");
+        for (int i = 0; i < requestCount; i++){
+        var proxyAddress = proxyList[i];
         var proxy = new WebProxy(proxyAddress);
-        using (HttpClientHandler handler = new HttpClientHandler())
-        {
-        handler.Proxy = proxy;
-        handler.UseProxy = true;
-        using (HttpClient httpClient = new HttpClient(handler))
-        {
-                httpClient.Timeout = TimeSpan.FromSeconds(40);
-                httpClient.DefaultRequestHeaders.Add("User-Agent", GenerateUserAgent());
-
-                HttpRequestMessage httpRequest = new HttpRequestMessage(method, url);
-                if (data != null)
-                {
-                    httpRequest.Content = new StringContent(data);
-                    httpRequest.Content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
-                }
-
-                foreach (var header in headers)
-                {
-                    httpRequest.Headers.Add(header.Key, header.Value);
-                }
-
-                try
-                {
-                    HttpResponseMessage httpResponse = await httpClient.SendAsync(httpRequest);
-                    string content = await httpResponse.Content.ReadAsStringAsync();
-                }
-                catch (TaskCanceledException)
-                {
-                    Console.WriteLine($"[{httpRequest.RequestUri.Host}] Превышено время ответа сервера.");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"[{httpRequest.RequestUri.Host}] Ошибка: {e.Message}");
+        using (HttpClientHandler handler = new HttpClientHandler(){
+            Proxy = proxy,
+            UseProxy = true,
+            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true})
+            {
+                using(HttpClient httpClient = new HttpClient(handler)){
+                    httpClient.Timeout = TimeSpan.FromSeconds(10);
+                    httpClient.DefaultRequestHeaders.Add("User-Agent", GenerateUserAgent());
+                    foreach (var header in headers){
+                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
+                        }
+                        try
+                        {
+                            HttpRequestMessage httpRequest = new HttpRequestMessage(method, url);
+                            if(!string.IsNullOrEmpty(data)){
+                                httpRequest.Content = new StringContent(data, Encoding.UTF8, mediaType);
+                                }
+                                HttpResponseMessage httpResponse = await httpClient.SendAsync(httpRequest);
+                                string content = await httpResponse.Content.ReadAsStringAsync();
+                                Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Ответ: {httpResponse.StatusCode}");
+                                }
+                                catch (TaskCanceledException){
+                                    Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Превышено время ответа");
+                                    }
+                                    catch (HttpRequestException e){
+                                        Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Ошибка запроса: {e.Message}");
+                                        }
+                                        catch (Exception e){
+                                            Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Общая ошибка: {e.Message}");
+                                            }
                 }
             }
+        }
+    }
+    
+    static async Task SendRequestWithoutProxy(string url, HttpMethod method, string data, string mediaType, Dictionary<string, string> headers){
+        using (HttpClient httpClient = new HttpClient()){
+            httpClient.Timeout = TimeSpan.FromSeconds(10);
+            httpClient.DefaultRequestHeaders.Add("User-Agent", GenerateUserAgent());
+            foreach (var header in headers){
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
+                }
+                try
+                {
+                    HttpRequestMessage httpRequest = new HttpRequestMessage(method, url);
+                    if(!string.IsNullOrEmpty(data)){
+                        httpRequest.Content = new StringContent(data, Encoding.UTF8, mediaType);
+                        }
+                        HttpResponseMessage httpResponse = await httpClient.SendAsync(httpRequest);
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        Console.WriteLine($"[Без прокси] {httpRequest.RequestUri.Host} - Ответ: {httpResponse.StatusCode}");
+                        }
+                        catch(TaskCanceledException){
+                            Console.WriteLine($"[Без прокси] {url} - Превышено время ответа");
+                            }
+                            catch (HttpRequestException e){
+                                Console.WriteLine($"[Без прокси] {url} - Ошибка запроса: {e.Message}");
+                                }
+                                catch (Exception e){
+                                    Console.WriteLine($"[Без прокси] {url} - Общая ошибка: {e.Message}");
+                                    }
         }
     }
 }
