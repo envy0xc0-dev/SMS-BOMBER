@@ -167,56 +167,62 @@ internal class envy{
     
     static async Task SendRequestAsync(string url, HttpMethod method, string data, string mediaType, Dictionary<string, string> headers){
         int requestCount = proxyList.Count;
-        Console.WriteLine("Отправка запросов без прокси...");
-        await SendRequestWithoutProxy(url, method, data, mediaType, headers);
-        Console.WriteLine("Отправка запросов через прокси...");
-        for (int i = 0; i < requestCount; i++){
-        var proxyAddress = proxyList[i];
-        var proxy = new WebProxy(proxyAddress);
-        using (HttpClientHandler handler = new HttpClientHandler(){
-            Proxy = proxy,
-            UseProxy = true,
-            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true})
-            {
-                using(HttpClient httpClient = new HttpClient(handler)){
-                    httpClient.Timeout = TimeSpan.FromSeconds(10);
-                    httpClient.DefaultRequestHeaders.Add("User-Agent", GenerateUserAgent());
-                    foreach (var header in headers){
-                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
-                        }
-                        try
-                        {
-                            HttpRequestMessage httpRequest = new HttpRequestMessage(method, url);
-                            if(!string.IsNullOrEmpty(data)){
-                                httpRequest.Content = new StringContent(data, Encoding.UTF8, mediaType);
-                                }
-                                HttpResponseMessage httpResponse = await httpClient.SendAsync(httpRequest);
-                                string content = await httpResponse.Content.ReadAsStringAsync();
-                                Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Ответ: {httpResponse.StatusCode}");
-                                }
-                                catch (TaskCanceledException){
-                                    Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Превышено время ответа");
-                                    }
-                                    catch (HttpRequestException e){
-                                        Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Ошибка запроса: {e.Message}");
-                                        }
-                                        catch (Exception e){
-                                            Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Общая ошибка: {e.Message}");
-                                            }
+        _ = Task.Run(async () =>
+        {
+            while(true){
+                Console.WriteLine("Отправка запроса без прокси...");
+                await SendRequestWithoutProxy(url, method, data, mediaType, headers);
+                await Task.Delay(TimeSpan.FromMinutes(2));
                 }
-            }
-        }
+                });
+                while(true){
+                    Console.WriteLine("Отправка запросов через прокси...");
+                    for(int i = 0; i < requestCount; i++){
+                        var proxyAddress = proxyList[i];
+                        var proxy = new WebProxy(proxyAddress);
+                        using(HttpClientHandler handler = new HttpClientHandler(){
+                            Proxy = proxy,
+                            UseProxy = true,
+                            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true}){
+                                using (HttpClient httpClient = new HttpClient(handler))
+                                {
+                                    httpClient.Timeout = TimeSpan.FromSeconds(10);
+                                    httpClient.DefaultRequestHeaders.Add("User-Agent", GenerateUserAgent());
+                                    foreach(var header in headers){
+                                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
+                                        }
+                                        try{
+                                            HttpRequestMessage httpRequest = new HttpRequestMessage(method, url);
+                                            if(!string.IsNullOrEmpty(data)){
+                                                httpRequest.Content = new StringContent(data, Encoding.UTF8, mediaType);
+                                                }
+                                                HttpResponseMessage httpResponse = await httpClient.SendAsync(httpRequest);
+                                                string content = await httpResponse.Content.ReadAsStringAsync();
+                                                Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Ответ: {httpResponse.StatusCode}");
+                                                }
+                                                catch(TaskCanceledException){
+                                                    Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Превышено время ответа"); 
+                                                    }
+                                                    catch(HttpRequestException e){
+                                                        Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Ошибка запроса: {e.Message}");
+                                                        }
+                                                        catch (Exception e){
+                                                            Console.WriteLine($"[{i + 1}/{requestCount}] {proxyAddress} - Общая ошибка: {e.Message}");
+                                                        }
+                                }
+                            }
+                    }
+                }
     }
     
     static async Task SendRequestWithoutProxy(string url, HttpMethod method, string data, string mediaType, Dictionary<string, string> headers){
-        using (HttpClient httpClient = new HttpClient()){
+        using(HttpClient httpClient = new HttpClient()){
             httpClient.Timeout = TimeSpan.FromSeconds(10);
             httpClient.DefaultRequestHeaders.Add("User-Agent", GenerateUserAgent());
-            foreach (var header in headers){
+            foreach(var header in headers){
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
                 }
-                try
-                {
+                try{
                     HttpRequestMessage httpRequest = new HttpRequestMessage(method, url);
                     if(!string.IsNullOrEmpty(data)){
                         httpRequest.Content = new StringContent(data, Encoding.UTF8, mediaType);
@@ -228,12 +234,12 @@ internal class envy{
                         catch(TaskCanceledException){
                             Console.WriteLine($"[Без прокси] {url} - Превышено время ответа");
                             }
-                            catch (HttpRequestException e){
+                            catch(HttpRequestException e){
                                 Console.WriteLine($"[Без прокси] {url} - Ошибка запроса: {e.Message}");
                                 }
-                                catch (Exception e){
+                                catch(Exception e){
                                     Console.WriteLine($"[Без прокси] {url} - Общая ошибка: {e.Message}");
-                                    }
+                                }
         }
     }
 }
