@@ -15,5 +15,4 @@
       TRX(TRC20): TDNEqCrKLpP3BZkt91AWDVFPSPADeZYEN4
       Bitcoin: bc1qdnyan4yk49epsdy2mepx5x49q73klzvuwym64l
   
-![BOMBER](https://github.com/user-attachments/assets/d43a255d-b4ec-448a-8db2-f31aacab3205)
-
+<img width="1174" height="786" alt="image" src="https://github.com/user-attachments/assets/40d4de58-b983-44b1-9fd0-c5360aa1702f" />
